@@ -1,15 +1,10 @@
 package it.objectmethod.ecommerce.entity;
 
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,10 +22,7 @@ public class Utente {
 	@Column(name = "password")
 	private String password;
 	
-	@JoinColumn(name = "id_utente")
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Ordine> ordini;
 
 	public Long getId() {
 		return id;
@@ -56,13 +48,6 @@ public class Utente {
 		this.password = password;
 	}
 
-	public List<Ordine> getOrdini() {
-		return ordini;
-	}
-
-	public void setOrdini(List<Ordine> ordini) {
-		this.ordini = ordini;
-	}
 	
 	
 }

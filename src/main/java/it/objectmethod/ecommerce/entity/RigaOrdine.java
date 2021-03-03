@@ -11,25 +11,25 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "carrello_dettaglio")
-public class CarrelloDettaglio {
-	
+@Table(name = "riga_ordine")
+public class RigaOrdine {
 	@GeneratedValue
 	@Id
-	@Column(name = "id_carrello_dettaglio")
+	@Column(name = "id_riga_ordine")
 	private Long id;
 	
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name = "id_carrello")
-	private Carrello carrello;
+	@JoinColumn(name = "id_ordine")
+	private Ordine ordine;
 	
 	
 	@ManyToOne
 	@JoinColumn(name = "id_articolo")
 	private Articolo articolo;
 	
-	private int quantita;
+	@Column(name = "quantita")
+	private Integer quantita;
 
 	public Long getId() {
 		return id;
@@ -39,12 +39,12 @@ public class CarrelloDettaglio {
 		this.id = id;
 	}
 
-	public Carrello getCarrello() {
-		return carrello;
+	public Ordine getOrdine() {
+		return ordine;
 	}
 
-	public void setCarrello(Carrello carrello) {
-		this.carrello = carrello;
+	public void setOrdine(Ordine ordine) {
+		this.ordine = ordine;
 	}
 
 	public Articolo getArticolo() {
@@ -55,11 +55,11 @@ public class CarrelloDettaglio {
 		this.articolo = articolo;
 	}
 
-	public int getQuantita() {
+	public Integer getQuantita() {
 		return quantita;
 	}
 
-	public void setQuantita(int quantita) {
+	public void setQuantita(Integer quantita) {
 		this.quantita = quantita;
 	}
 	
