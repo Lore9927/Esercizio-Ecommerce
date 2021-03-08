@@ -4,24 +4,24 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.objectmethod.ecommerce.entity.Articolo;
-import it.objectmethod.ecommerce.repo.ArticoloRepository;
+import it.objectmethod.ecommerce.service.ArticoloService;
+import it.objectmethod.ecommerce.service.dto.ArticoloDTO;
 
 @RestController
 @RequestMapping("/api/articoli")
 public class ArticoloController {
 	
 	@Autowired
-	private ArticoloRepository articoliRepo;
+	private ArticoloService articoloServ;
 	
 	@GetMapping("/find")
-	public List<Articolo> find(@RequestParam("nome") String nome, @RequestParam("codice") String codice) {
-		List<Articolo> a = articoliRepo.findByNameOrCode(nome, codice);
-		return a;
+	public List<ArticoloDTO> find(@RequestBody ArticoloDTO art) {
+		List<ArticoloDTO> articoliDTO = articoloServ.findItemByNameOrCode(art);
+		return articoliDTO;
 	}
 
 }

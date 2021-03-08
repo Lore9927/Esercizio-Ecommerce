@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.objectmethod.ecommerce.controller.service.JWTService;
-import it.objectmethod.ecommerce.entity.Utente;
-import it.objectmethod.ecommerce.repo.UtenteRepository;
+import it.objectmethod.ecommerce.service.UtenteService;
+import it.objectmethod.ecommerce.service.dto.UtenteDTO;
+import it.objectmethod.ecommerce.service.dto.UtenteRequestDTO;
 
 
 @RestController
@@ -18,19 +19,17 @@ import it.objectmethod.ecommerce.repo.UtenteRepository;
 public class UtenteController {
 	
 	@Autowired
-	private UtenteRepository utenteRep;
+	private UtenteService utenteServ;
 	
 	@Autowired
 	private JWTService jwtServ;
 	
 	@PostMapping("/login")
-	public ResponseEntity<String> login(@RequestBody Utente u ) {
-		String nome = u.getNome();
-		String password = u.getPassword();
+	public ResponseEntity<String> login(@RequestBody UtenteRequestDTO u ) {
 		String token;
 		ResponseEntity<String> resp = new ResponseEntity<>("Nome utente o password errati", HttpStatus.BAD_REQUEST);
 		
-		Utente utente = utenteRep.findByNomeAndPassword(nome, password);
+		UtenteDTO utente = utenteServ.findUserByNomeAndPassword(u);
 		if(utente != null)
 		{
 			token = jwtServ.createJWTToken(utente);

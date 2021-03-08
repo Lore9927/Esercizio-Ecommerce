@@ -1,6 +1,6 @@
 package it.objectmethod.ecommerce.entity;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -29,7 +29,7 @@ public class Ordine {
 	private String numeroOrdine;
 	
 	@Column(name = "data_ordine")
-	private Date dataOrdine;
+	private LocalDate dataOrdine;
 	
 	@JsonIgnore
 	@ManyToOne
@@ -73,13 +73,15 @@ public class Ordine {
 		this.righe = righe;
 	}
 
-	public Date getDataOrdine() {
+	public LocalDate getDataOrdine() {
 		return dataOrdine;
 	}
 
-	public void setDataOrdine(Date dataOrdine) {
+	public void setDataOrdine(LocalDate dataOrdine) {
 		this.dataOrdine = dataOrdine;
 	}
+
+	
 	
 	
 
