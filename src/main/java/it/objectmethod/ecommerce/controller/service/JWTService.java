@@ -13,6 +13,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
 
 import it.objectmethod.ecommerce.entity.Utente;
+import it.objectmethod.ecommerce.repo.UtenteRepository;
 import it.objectmethod.ecommerce.service.dto.UtenteDTO;
 import it.objectmethod.ecommerce.service.mapper.UtenteMapper;
 
@@ -21,6 +22,9 @@ public class JWTService {
 
 	@Autowired
 	UtenteMapper utenteMapper;
+	
+	@Autowired
+	UtenteRepository utenteRep;
 	
 	private static final String MY_SECRET_JWT_KEY = "my-secret-jwt-key";
 	
@@ -50,20 +54,17 @@ public class JWTService {
 		return valido;
 	}
 	
-	public UtenteDTO getIdUtenteByToken(String jwtToken) {
+	public UtenteDTO getUtenteByToken(String jwtToken) {
 		
 		Algorithm alg = Algorithm.HMAC256(MY_SECRET_JWT_KEY);
 		Long idUtente = null;
-		String nomeUtente;
 		UtenteDTO utente = null;
 		try {
 			JWTVerifier ver = JWT.require(alg).build();
 			DecodedJWT decoded = ver.verify(jwtToken);
 			idUtente = decoded.getClaim("idUtente").asLong();
-			nomeUtente = decoded.getClaim("nomeUtente").asString();
-			utente = new UtenteDTO();
-			utente.setId(idUtente);
-			utente.setNome(nomeUtente);
+			Utente u = utenteRep.findById(idUtente).get();
+			utente = utenteMapper.toDto(u);
 		} catch (JWTVerificationException e) {
 			e.printStackTrace();
 		}

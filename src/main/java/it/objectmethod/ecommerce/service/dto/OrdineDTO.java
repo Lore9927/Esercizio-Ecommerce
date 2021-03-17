@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public class OrdineDTO {
 	private Long id;
 	private LocalDate dataOrdine;
+	private String numeroOrdine;
 	private Long idUtente;
 	private String nomeUtente;
 	
@@ -31,6 +32,12 @@ public class OrdineDTO {
 	}
 	public void setNomeUtente(String nomeUtente) {
 		this.nomeUtente = nomeUtente;
+	}
+	public String getNumeroOrdine() {
+		return numeroOrdine;
+	}
+	public void setNumeroOrdine(String numeroOrdine) {
+		this.numeroOrdine = numeroOrdine;
 	}
 
 	

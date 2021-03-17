@@ -11,20 +11,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import it.objectmethod.ecommerce.controller.service.JWTService;
 
 @Component
-public class AuthenticationFilter implements Filter{
+@Order(2)
+public class AuthenticationFilter implements Filter {
 
 	@Autowired
 	JWTService jwtServ;
-	
+
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		
+
 		HttpServletRequest httpReq = (HttpServletRequest) request;
 		HttpServletResponse httpResp = (HttpServletResponse) response;
 		String url = httpReq.getRequestURI();
@@ -33,6 +35,7 @@ public class AuthenticationFilter implements Filter{
 			chain.doFilter(request, response);
 		} else {
 			String token = httpReq.getHeader("auth-token");
+			System.out.println("Token:" + token);
 			if (token != null) {
 				if (jwtServ.checkJWTToken(token)) {
 					System.out.println("TOKEN VALIDO RICHIESTA APPROVATA!");

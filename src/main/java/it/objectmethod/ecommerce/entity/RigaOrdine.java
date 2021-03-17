@@ -8,7 +8,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "riga_ordine")
@@ -18,7 +17,7 @@ public class RigaOrdine {
 	@Column(name = "id_riga_ordine")
 	private Long id;
 	
-	@JsonIgnore
+	
 	@ManyToOne
 	@JoinColumn(name = "id_ordine")
 	private Ordine ordine;

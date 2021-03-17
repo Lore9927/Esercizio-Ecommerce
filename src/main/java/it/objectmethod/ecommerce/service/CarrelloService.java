@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import it.objectmethod.ecommerce.controller.service.JWTService;
 import it.objectmethod.ecommerce.entity.Articolo;
 import it.objectmethod.ecommerce.entity.Carrello;
 import it.objectmethod.ecommerce.entity.CarrelloDettaglio;
@@ -14,10 +13,8 @@ import it.objectmethod.ecommerce.entity.Utente;
 import it.objectmethod.ecommerce.repo.ArticoloRepository;
 import it.objectmethod.ecommerce.repo.CarrelloRepository;
 import it.objectmethod.ecommerce.repo.UtenteRepository;
-import it.objectmethod.ecommerce.service.dto.ArticoloRequestDTO;
 import it.objectmethod.ecommerce.service.dto.CarrelloDTO;
 import it.objectmethod.ecommerce.service.dto.UtenteDTO;
-import it.objectmethod.ecommerce.service.mapper.ArticoloRequestMapper;
 import it.objectmethod.ecommerce.service.mapper.CarrelloMapper;
 import it.objectmethod.ecommerce.service.mapper.UtenteMapper;
 
@@ -39,20 +36,11 @@ public class CarrelloService {
 	@Autowired
 	UtenteMapper utenteMapper;
 
-	@Autowired
-	ArticoloRequestMapper articoloReqMapper;
-
-	@Autowired
-	JWTService jwtServ;
-
-	public CarrelloDTO addItems(ArticoloRequestDTO articoloDTO, String token) {
+	public CarrelloDTO addItems(String codiceArticolo, Integer quantita, UtenteDTO utenteDTO) {
 		CarrelloDTO carrelloDTO = null;
 		boolean errore = false;
-		int quantita = articoloDTO.getQuantita();
-		Articolo articolo = articoloReqMapper.toEntity(articoloDTO);
-		articolo = articoloRep.findByCodiceArticolo(articolo.getCodiceArticolo());
+		Articolo articolo = articoloRep.findByCodiceArticolo(codiceArticolo);
 		if (articolo != null && articolo.getDisponibilita() > quantita) {
-			UtenteDTO utenteDTO = jwtServ.getIdUtenteByToken(token);
 			Utente utente = utenteMapper.toEntity(utenteDTO);
 			boolean trovato = false;
 			Carrello carrello = carrelloRep.findByIdUtente(utente.getId());

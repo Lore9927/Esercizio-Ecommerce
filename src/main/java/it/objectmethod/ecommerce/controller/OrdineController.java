@@ -26,7 +26,7 @@ public class OrdineController {
 	@PutMapping("/add")
 	public ResponseEntity<OrdineDTO> createOrder(@RequestHeader("auth-token") String token) {
 		ResponseEntity<OrdineDTO> resp = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		UtenteDTO utenteDTO = jwtServ.getIdUtenteByToken(token);
+		UtenteDTO utenteDTO = jwtServ.getUtenteByToken(token);
 		OrdineDTO ordineDTO = ordineServ.createOrder(utenteDTO);
 		if(ordineDTO != null) {
 			resp = new ResponseEntity<>(ordineDTO,HttpStatus.ACCEPTED);

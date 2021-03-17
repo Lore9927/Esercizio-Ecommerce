@@ -8,7 +8,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "carrello_dettaglio")
@@ -19,7 +18,6 @@ public class CarrelloDettaglio {
 	@Column(name = "id_carrello_dettaglio")
 	private Long id;
 	
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "id_carrello")
 	private Carrello carrello;
@@ -29,7 +27,7 @@ public class CarrelloDettaglio {
 	@JoinColumn(name = "id_articolo")
 	private Articolo articolo;
 	
-	private int quantita;
+	private Integer quantita;
 
 	public Long getId() {
 		return id;
@@ -55,7 +53,7 @@ public class CarrelloDettaglio {
 		this.articolo = articolo;
 	}
 
-	public int getQuantita() {
+	public Integer getQuantita() {
 		return quantita;
 	}
 

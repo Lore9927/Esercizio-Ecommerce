@@ -14,7 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "ordine")
@@ -31,7 +30,6 @@ public class Ordine {
 	@Column(name = "data_ordine")
 	private LocalDate dataOrdine;
 	
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "id_utente")
 	private Utente utente;

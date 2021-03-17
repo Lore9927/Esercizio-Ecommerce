@@ -1,9 +1,12 @@
 package it.objectmethod.ecommerce.service.dto;
 
+import java.util.List;
+
 public class CarrelloDTO {
 	private Long id;
 	private Long idUtente;
 	private String nomeUtente;
+	private List<CarrelloDettaglioDTO> dettagli;
 	
 	public Long getId() {
 		return id;
@@ -22,6 +25,12 @@ public class CarrelloDTO {
 	}
 	public void setNomeUtente(String nomeUtente) {
 		this.nomeUtente = nomeUtente;
+	}
+	public List<CarrelloDettaglioDTO> getDettagli() {
+		return dettagli;
+	}
+	public void setDettagli(List<CarrelloDettaglioDTO> dettagli) {
+		this.dettagli = dettagli;
 	}
 	
 	

@@ -25,4 +25,11 @@ public class ArticoloService {
 		List<ArticoloDTO> articoliDTO = articoloMapper.toDto(articoli);
 		return articoliDTO;
 	}
+	
+	public List<ArticoloDTO> findAll() {
+		List<Articolo> articoli = articoliRepo.findAll();
+		List<ArticoloDTO> articoliDTO = articoloMapper.toDto(articoli);
+		
+		return articoliDTO;
+	}
 }

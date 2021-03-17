@@ -23,5 +23,11 @@ public class ArticoloController {
 		List<ArticoloDTO> articoliDTO = articoloServ.findItemByNameOrCode(art);
 		return articoliDTO;
 	}
+	
+	@GetMapping("/find-all")
+	public List<ArticoloDTO> find() {
+		List<ArticoloDTO> articoliDTO = articoloServ.findAll();
+		return articoliDTO;
+	}
 
 }
