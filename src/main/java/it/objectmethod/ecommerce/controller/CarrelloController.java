@@ -3,6 +3,7 @@ package it.objectmethod.ecommerce.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,20 @@ public class CarrelloController {
 		UtenteDTO utenteDTO = jwtServ.getUtenteByToken(token);
 		if (utenteDTO != null) {
 			CarrelloDTO carrelloDTO = carrelloServ.addItems(codiceArticolo, quantita, utenteDTO);
+			if (carrelloDTO != null) {
+				resp = new ResponseEntity<>(carrelloDTO, HttpStatus.ACCEPTED);
+			}
+		}
+
+		return resp;
+	}
+	
+	@GetMapping("/get-cart")
+	public ResponseEntity<CarrelloDTO> checkCart(@RequestHeader("auth-token") String token) {
+		ResponseEntity<CarrelloDTO> resp = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		UtenteDTO utenteDTO = jwtServ.getUtenteByToken(token);
+		if (utenteDTO != null) {
+			CarrelloDTO carrelloDTO = carrelloServ.checkCart(utenteDTO);
 			if (carrelloDTO != null) {
 				resp = new ResponseEntity<>(carrelloDTO, HttpStatus.ACCEPTED);
 			}

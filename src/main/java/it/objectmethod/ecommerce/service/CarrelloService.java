@@ -36,6 +36,12 @@ public class CarrelloService {
 	@Autowired
 	UtenteMapper utenteMapper;
 
+	public CarrelloDTO checkCart(UtenteDTO utenteDTO) {
+		Utente utente = utenteMapper.toEntity(utenteDTO);
+		Carrello carrello = carrelloRep.findByIdUtente(utente.getId());
+		CarrelloDTO carrelloDTO = carrelloMapper.toDto(carrello);
+		return carrelloDTO;
+	}
 	public CarrelloDTO addItems(String codiceArticolo, Integer quantita, UtenteDTO utenteDTO) {
 		CarrelloDTO carrelloDTO = null;
 		boolean errore = false;

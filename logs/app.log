@@ -1,0 +1,4 @@
+2021-03-18 16:47:49,032 INFO o.s.b.StartupInfoLogger [main] Starting EsercizioEcommerceApplication using Java 1.8.0_171 on LAPTOP-JM5NK51I with PID 13812 (D:\Eclipse Workspace\04 - Quarta Settimana\03 - Terzo giorno\esercizio-ecommerce\target\classes started by loren in D:\Eclipse Workspace\04 - Quarta Settimana\03 - Terzo giorno\esercizio-ecommerce)
+2021-03-18 16:47:49,048 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v2.4.3, Spring v5.3.4
+2021-03-18 16:47:49,048 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2021-03-18 16:47:54,476 INFO o.s.b.StartupInfoLogger [main] Started EsercizioEcommerceApplication in 5.863 seconds (JVM running for 7.034)
